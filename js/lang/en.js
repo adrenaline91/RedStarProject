@@ -400,5 +400,8 @@ OS.i18n.add('en', {
   '{0}: 원본과 대상을 주십시오': '{0}: missing source and destination',
   '(휴지통으로 옮겼습니다)': '(moved to Trash)',
   '(없음)': '(none)',
-  '페지를 열수 없습니다': "Cannot open this page"
+  '페지를 열수 없습니다': "Cannot open this page",
+  '시동음과 끝내기음 재생': "Play startup and log out sounds",
+  '효과음 재생': "Play sound effects",
+  '시동음 듣기': "Play Startup Sound"
 });

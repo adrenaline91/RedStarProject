@@ -284,6 +284,7 @@
       ], done);
       const range = el.querySelector('input');
       range.addEventListener('input', () => { OS.set('muted', false); OS.set('volume', +range.value); });
+      range.addEventListener('change', () => OS.sound.play('pop'));
     } else if (kind === 'net') {
       OS.menu(x - 100, OS.MENU_H, [
         { header: 1, label: '광명망: 련결중' },
@@ -394,7 +395,10 @@
   }
   OS.emptyTrash = async () => {
     if (!fs.trash.length) return;
-    if (await OS.confirm(`휴지통에 있는 항목 ${fs.trash.length}개를 영구 삭제하겠습니까?\n이 조작은 되돌릴수 없습니다.`, '휴지통 비우기')) fs.emptyTrash();
+    if (await OS.confirm(`휴지통에 있는 항목 ${fs.trash.length}개를 영구 삭제하겠습니까?\n이 조작은 되돌릴수 없습니다.`, '휴지통 비우기')) {
+      fs.emptyTrash();
+      OS.sound.play('trash');
+    }
   };
 
   function stack(iconEl) {
@@ -477,7 +481,7 @@
     try { return fs.rename(p, name); } catch (err) { OS.alert(err.message); return null; }
   }
   function trashItem(p) {
-    try { fs.remove(p); } catch (err) { OS.alert(err.message); }
+    try { fs.remove(p); OS.sound.play('pop'); } catch (err) { OS.alert(err.message); }
   }
   Object.assign(OS, { newFolderIn, newDocIn, renameItem, trashItem, renderDesktop });
 
@@ -502,6 +506,7 @@
   OS.boot = (cb) => {
     const el = OS.h(`<div class="power boot"><img src="icons/redstar.png"><div class="boot-name">붉은별</div><div class="boot-bar"><i></i></div></div>`);
     overlay.appendChild(el);
+    OS.sound.play('startup');
     let done = false;
     const finish = () => {
       if (done) return;
@@ -532,6 +537,7 @@
     const r = await OS.dialog({ icon: 'icons/redstar.png', title: msgs[1], message: msgs[0], buttons: ['취소', msgs[1]] });
     if (r.button !== 1) return;
     OS.windows.slice().forEach(w => w.close(true));
+    await OS.sound.play('logout');
     if (kind === 'restart') {
       const black = OS.h('<div class="power off"></div>');
       overlay.appendChild(black);

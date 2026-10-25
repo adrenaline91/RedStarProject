@@ -383,5 +383,8 @@ OS.i18n.add('de', {
   '{0}: 원본과 대상을 주십시오': '{0}: Quelle und Ziel fehlen',
   '(휴지통으로 옮겼습니다)': '(in den Papierkorb gelegt)',
   '(없음)': '(keine)',
-  '페지를 열수 없습니다': "Diese Seite kann nicht geöffnet werden"
+  '페지를 열수 없습니다': "Diese Seite kann nicht geöffnet werden",
+  '시동음과 끝내기음 재생': "Start- und Abmeldetöne abspielen",
+  '효과음 재생': "Toneffekte abspielen",
+  '시동음 듣기': "Startton abspielen"
 });

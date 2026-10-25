@@ -160,22 +160,14 @@
     sound(el) {
       el.innerHTML = `<div class="sp-row"><span class="sp-label">출력 음량:</span><span>🔈</span><input type="range" min="0" max="100" value="${OS.settings.volume}" class="sp-range"><span>🔊</span></div>
         <div class="sp-row">${check('muted', '소리 끄기')}</div>
-        <div class="sp-row"><button class="btn sp-test">시험음 듣기</button></div>`;
+        <div class="sp-row">${check('sysSounds', '시동음과 끝내기음 재생')}</div>
+        <div class="sp-row">${check('uiSounds', '효과음 재생')}</div>
+        <div class="sp-row"><button class="btn sp-test">시험음 듣기</button><button class="btn sp-test-start">시동음 듣기</button></div>`;
       el.querySelector('.sp-range').oninput = e => OS.set('volume', +e.target.value);
+      el.querySelector('.sp-range').onchange = () => OS.sound.play('pop');
+      el.querySelector('.sp-test-start').onclick = () => OS.sound.play('startup');
       bindChecks(el);
-      el.querySelector('.sp-test').onclick = () => {
-        if (OS.settings.muted) return;
-        try {
-          const ac = new (window.AudioContext || window.webkitAudioContext)();
-          const o = ac.createOscillator(), g = ac.createGain();
-          o.frequency.value = 880;
-          g.gain.value = OS.settings.volume / 400;
-          o.connect(g).connect(ac.destination);
-          o.start();
-          g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.4);
-          o.stop(ac.currentTime + 0.45);
-        } catch (e) {}
-      };
+      el.querySelector('.sp-test').onclick = () => OS.sound.play('alert');
     },
     network(el) {
       el.innerHTML = `<table class="sp-tbl"><tr><th>상태</th><td><span class="sp-dot"></span> 련결됨</td></tr>

@@ -32,7 +32,7 @@
 
   OS.settings = Object.assign({
     wallpaper: 'color:#3a5a30', clock24: true, seconds: false, showDate: false,
-    volume: 70, muted: false, dockSize: 58, magnify: true, user: '사용자', ime: 'en', lang: 'kp'
+    volume: 70, muted: false, dockSize: 58, magnify: true, user: '사용자', ime: 'en', lang: 'kp', sysSounds: true, uiSounds: true
   }, OS.store.get('settings', {}));
   OS.set = (k, v) => { OS.settings[k] = v; OS.store.set('settings', OS.settings); OS.emit('settings', k); };
 
@@ -403,6 +403,7 @@
     OS.emit('windows');
   }
   function minimize(win) {
+    if (OS.sound) OS.sound.play('minimize');
     const target = document.querySelector(`#dock .icon[data-app="${win.app}"]`);
     const el = win.el;
     if (target) {
@@ -494,6 +495,7 @@
       </div></div>`);
     back.appendChild(dlg);
     overlay.appendChild(back);
+    if (o.input == null && OS.sound) OS.sound.play('alert');
     const input = dlg.querySelector('.dlg-input');
     const done = i => {
       back.remove();

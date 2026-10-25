@@ -12,6 +12,7 @@ Made by [adrenaline91](https://github.com/adrenaline91).
 
 - **Desktop**: menu bar with the ★ menu, clock (with Juche year), sound and network menus, draggable windows (close / minimize / zoom / resize), dock with magnification, desktop icons and right-click menus.
 - **Boot, sleep, restart, shut down and log out** screens.
+- **Sounds**: the original Red Star OS startup and log out sounds, plus sound effects (alerts, minimize, trash, volume). They follow the volume and mute settings and can be turned off in System Preferences > Sound.
 - **Korean 2-set input method** (Shift+Space or the A/가 button) that composes Hangul syllables in any text field.
 - **Virtual file system** saved in the browser (localStorage), with Trash, drag & drop and file import from your computer.
 - **Apps**: 내나라열람기 (Naenara browser, with tabs, history and bookmarks), File Manager, Text Editor, Image Viewer, Calendar, Address Book, Calculator, Video Player, File Search, System Preferences and Terminal.
@@ -53,14 +54,15 @@ js/lang/            dictionaries (one file per language)
 js/apps/            the applications
 js/boot.js          startup
 main.js, preload.js Electron desktop app
-icons/, wallpapers/ Red Star OS assets
+js/sound.js         system sounds
+icons/, wallpapers/, sounds/  Red Star OS assets
 ```
 
 Add a language by copying `js/lang/en.js`, translating the values and adding it to `index.html` and to `BUILTIN` in `js/i18n.js`.
 
 ## Credits
 
-Icons and wallpapers come from the original Red Star OS 3.0 and belong to their respective owners. They were taken from these public extractions:
+Icons, wallpapers and the startup / log out sounds come from the original Red Star OS 3.0 and belong to their respective owners. They were taken from these public extractions:
 
 - [BlackOtton/RedStar-Media](https://github.com/BlackOtton/RedStar-Media)
 - [kaiserfen/RedstarOSxfce](https://github.com/kaiserfen/RedstarOSxfce)
