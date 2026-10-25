@@ -31,6 +31,12 @@ function createWindow() {
 }
 
 app.on('web-contents-created', (_, contents) => {
+  contents.on('before-input-event', (e, input) => {
+    if (input.type === 'keyDown' && input.key === 'F11' && win && !win.isDestroyed()) {
+      e.preventDefault();
+      win.setFullScreen(!win.isFullScreen());
+    }
+  });
   contents.on('will-attach-webview', (e, webPreferences) => {
     delete webPreferences.preload;
     webPreferences.nodeIntegration = false;

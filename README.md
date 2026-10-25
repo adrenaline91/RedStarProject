@@ -40,7 +40,7 @@ Requires [Node.js](https://nodejs.org).
 
   If `npm install` does not download the Electron binary, run `node node_modules/electron/install.js` once.
 
-The desktop app uses Electron `<webview>` tags, so the Naenara browser can open any website.
+The desktop app uses Electron `<webview>` tags, so the Naenara browser can open any website. Press **F11** to toggle full screen.
 
 ## Project structure
 
