@@ -12,7 +12,7 @@ Made by [adrenaline91](https://github.com/adrenaline91).
 
 - **Desktop**: menu bar with the ★ menu, clock (with Juche year), sound and network menus, draggable windows (close / minimize / zoom / resize), dock with magnification, desktop icons and right-click menus.
 - **Boot, sleep, restart, shut down and log out** screens.
-- **Sounds**: the original Red Star OS startup and log out sounds, plus sound effects (alerts, minimize, trash, volume). They follow the volume and mute settings and can be turned off in System Preferences > Sound.
+- **Sounds**: the original Red Star OS startup and log out sounds, and the standard KDE 4 "Oxygen" sounds that Red Star OS 3.0 uses for everything else (warnings, questions, errors, information, empty trash, minimize, maximize, close). They follow the volume and mute settings and can be turned off in System Preferences > Sound.
 - **Korean 2-set input method** (Shift+Space or the A/가 button) that composes Hangul syllables in any text field.
 - **Virtual file system** saved in the browser (localStorage), with Trash, drag & drop and file import from your computer.
 - **Apps**: 내나라열람기 (Naenara browser, with tabs, history and bookmarks), File Manager, Text Editor, Image Viewer, Calendar, Address Book, Calculator, Video Player, File Search, System Preferences and Terminal.
@@ -68,3 +68,5 @@ Icons, wallpapers and the startup / log out sounds come from the original Red St
 - [kaiserfen/RedstarOSxfce](https://github.com/kaiserfen/RedstarOSxfce)
 
 Some icons that were not available (calendar, Documents stack) were redrawn in SVG.
+
+The system sounds in `sounds/kde/` are the KDE 4 Oxygen sounds, © 2008 Nuno Filipe Povoa, licensed under LGPL-3.0-or-later ([source](https://invent.kde.org/plasma/oxygen-sounds)). See `sounds/kde/README.txt`.

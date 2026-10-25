@@ -283,9 +283,7 @@
         { label: '소리 설정...', action: () => OS.launch('settings', { pane: 'sound' }) }
       ], done);
       const range = el.querySelector('input');
-      range.addEventListener('input', () => { OS.set('muted', false); OS.set('volume', +range.value); });
-      range.addEventListener('change', () => OS.sound.play('pop'));
-    } else if (kind === 'net') {
+      range.addEventListener('input', () => { OS.set('muted', false); OS.set('volume', +range.value); });    } else if (kind === 'net') {
       OS.menu(x - 100, OS.MENU_H, [
         { header: 1, label: '광명망: 련결중' },
         { header: 1, label: '주소: 10.76.1.11' },
@@ -481,7 +479,7 @@
     try { return fs.rename(p, name); } catch (err) { OS.alert(err.message); return null; }
   }
   function trashItem(p) {
-    try { fs.remove(p); OS.sound.play('pop'); } catch (err) { OS.alert(err.message); }
+    try { fs.remove(p); } catch (err) { OS.dialog({ message: err.message, sound: 'error' }); }
   }
   Object.assign(OS, { newFolderIn, newDocIn, renameItem, trashItem, renderDesktop });
 

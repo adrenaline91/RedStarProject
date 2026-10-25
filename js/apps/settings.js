@@ -164,10 +164,10 @@
         <div class="sp-row">${check('uiSounds', '효과음 재생')}</div>
         <div class="sp-row"><button class="btn sp-test">시험음 듣기</button><button class="btn sp-test-start">시동음 듣기</button></div>`;
       el.querySelector('.sp-range').oninput = e => OS.set('volume', +e.target.value);
-      el.querySelector('.sp-range').onchange = () => OS.sound.play('pop');
+      el.querySelector('.sp-range').onchange = () => OS.sound.play('positive');
       el.querySelector('.sp-test-start').onclick = () => OS.sound.play('startup');
       bindChecks(el);
-      el.querySelector('.sp-test').onclick = () => OS.sound.play('alert');
+      el.querySelector('.sp-test').onclick = () => OS.sound.play('positive');
     },
     network(el) {
       el.innerHTML = `<table class="sp-tbl"><tr><th>상태</th><td><span class="sp-dot"></span> 련결됨</td></tr>

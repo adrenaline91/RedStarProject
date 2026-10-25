@@ -396,6 +396,7 @@
     if (!force && win.onClose && win.onClose() === false) return;
     const i = wins.indexOf(win);
     if (i < 0) return;
+    if (!force && OS.sound) OS.sound.play('close');
     wins.splice(i, 1);
     win.el.classList.add('closing');
     setTimeout(() => win.el.remove(), 140);
@@ -423,6 +424,7 @@
     OS.emit('windows');
   }
   function toggleMax(win) {
+    if (OS.sound) OS.sound.play('maximize');
     const el = win.el;
     if (!win.maximized) {
       win.prev = { left: el.style.left, top: el.style.top, width: el.style.width, height: el.style.height };
@@ -495,7 +497,7 @@
       </div></div>`);
     back.appendChild(dlg);
     overlay.appendChild(back);
-    if (o.input == null && OS.sound) OS.sound.play('alert');
+    if (o.input == null && OS.sound) OS.sound.play(o.sound || (buttons.length > 1 ? 'question' : 'message'));
     const input = dlg.querySelector('.dlg-input');
     const done = i => {
       back.remove();
