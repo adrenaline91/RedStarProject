@@ -11,6 +11,7 @@ Made by [adrenaline91](https://github.com/adrenaline91).
 ## Features
 
 - **Desktop**: menu bar with the ★ menu, clock (with Juche year), sound and network menus, draggable windows (close / minimize / zoom / resize), dock with magnification, desktop icons and right-click menus.
+- **Screen resolution** (분해능) can be changed in System Preferences > Display, from 800 × 600 to 2560 × 1440, or set to fit the window automatically. The default is 964 × 732.
 - **Boot, sleep, restart, shut down and log out** screens.
 - **Sounds**: the original Red Star OS startup and log out sounds, and the standard KDE 4 "Oxygen" sounds that Red Star OS 3.0 uses for everything else (warnings, questions, errors, information, empty trash, minimize, maximize, close). They follow the volume and mute settings and can be turned off in System Preferences > Sound.
 - **Korean 2-set input method** (Shift+Space or the A/가 button) that composes Hangul syllables in any text field.

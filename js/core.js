@@ -1,7 +1,9 @@
 (function () {
   'use strict';
-  const W = 964, H = 732, MENU_H = 27;
+  let W = 964, H = 732;
+  const MENU_H = 27;
   const OS = window.OS = { apps: {}, W, H, MENU_H, scale: 1 };
+  OS.RESOLUTIONS = ['800x600', '964x732', '1024x768', '1152x864', '1280x720', '1280x800', '1280x1024', '1366x768', '1440x900', '1600x900', '1680x1050', '1920x1080', '2560x1440'];
 
   OS.h = html => {
     const t = document.createElement('template');
@@ -32,16 +34,30 @@
 
   OS.settings = Object.assign({
     wallpaper: 'color:#3a5a30', clock24: true, seconds: false, showDate: false,
-    volume: 70, muted: false, dockSize: 58, magnify: true, user: '사용자', ime: 'en', lang: 'kp', sysSounds: true, uiSounds: true
+    volume: 70, muted: false, dockSize: 58, magnify: true, user: '사용자', ime: 'en', lang: 'kp', sysSounds: true, uiSounds: true, resolution: '964x732'
   }, OS.store.get('settings', {}));
   OS.set = (k, v) => { OS.settings[k] = v; OS.store.set('settings', OS.settings); OS.emit('settings', k); };
 
   const screen = OS.screen = document.getElementById('screen');
+  function readResolution() {
+    const r = OS.settings.resolution;
+    if (r === 'auto') return [Math.max(800, innerWidth), Math.max(600, innerHeight)];
+    const m = /^(\d+)x(\d+)$/.exec(r || '');
+    return m ? [+m[1], +m[2]] : [964, 732];
+  }
   function fit() {
+    const [nw, nh] = readResolution();
+    const changed = nw !== W || nh !== H;
+    W = OS.W = nw;
+    H = OS.H = nh;
+    screen.style.width = W + 'px';
+    screen.style.height = H + 'px';
     OS.scale = Math.min(innerWidth / W, innerHeight / H);
     screen.style.transform = `scale(${OS.scale}) translate(-50%, -50%)`;
+    if (changed) OS.emit('resolution');
   }
   addEventListener('resize', fit);
+  OS.on('settings', k => k === 'resolution' && fit());
   fit();
   OS.local = e => {
     const r = screen.getBoundingClientRect();
@@ -363,6 +379,18 @@
     blur() { wins.forEach(w => w.el.classList.remove('active')); wm.active = null; OS.emit('focus', null); },
     restore(win) { if (win.minimized) { win.minimized = false; win.el.style.display = ''; win.el.classList.add('opening'); setTimeout(() => win.el.classList.remove('opening'), 180); OS.emit('windows'); } focus(win); }
   };
+
+  OS.on('resolution', () => wins.forEach(w => {
+    const el = w.el;
+    if (w.maximized) Object.assign(el.style, { width: W + 'px', height: (H - MENU_H) + 'px' });
+    else {
+      el.style.width = Math.min(el.offsetWidth, W) + 'px';
+      el.style.height = Math.min(el.offsetHeight, H - MENU_H) + 'px';
+      el.style.left = Math.max(0, Math.min(el.offsetLeft, W - el.offsetWidth)) + 'px';
+      el.style.top = Math.max(MENU_H, Math.min(el.offsetTop, H - el.offsetHeight)) + 'px';
+    }
+    if (w.onResize) w.onResize();
+  }));
 
   function drag(handle, ok, start, move) {
     handle.addEventListener('pointerdown', e => {

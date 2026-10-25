@@ -386,5 +386,8 @@ OS.i18n.add('de', {
   '페지를 열수 없습니다': "Diese Seite kann nicht geöffnet werden",
   '시동음과 끝내기음 재생': "Start- und Abmeldetöne abspielen",
   '효과음 재생': "Toneffekte abspielen",
-  '시동음 듣기': "Startton abspielen"
+  '시동음 듣기': "Startton abspielen",
+  '분해능': "Auflösung",
+  '자동 (창문에 맞추기)': "Automatisch (an Fenster anpassen)",
+  '기본': "Standard"
 });

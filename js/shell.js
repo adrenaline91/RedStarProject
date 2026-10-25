@@ -488,6 +488,9 @@
     ime.style.left = Math.max(0, Math.min(OS.W - ime.offsetWidth, p0.x + d.x)) + 'px';
     ime.style.top = Math.max(0, Math.min(OS.H - 30, p0.y + d.y)) + 'px';
   });
+  const placeIme = () => { ime.style.left = (OS.W - 186) + 'px'; ime.style.top = OS.MENU_H + 'px'; };
+  placeIme();
+  OS.on('resolution', () => { placeIme(); applyDockSize(); renderDesktop(); });
   const imeA = ime.querySelector('.ime-a');
   const imeUpdate = () => { imeA.textContent = OS.settings.ime === 'ko' ? '가' : 'A'; imeA.classList.toggle('ko', OS.settings.ime === 'ko'); };
   imeUpdate();

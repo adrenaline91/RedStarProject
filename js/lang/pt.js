@@ -386,5 +386,8 @@ OS.i18n.add('pt', {
   '페지를 열수 없습니다': "Não é possível abrir esta página",
   '시동음과 끝내기음 재생': "Tocar sons de inicialização e de saída",
   '효과음 재생': "Tocar efeitos sonoros",
-  '시동음 듣기': "Ouvir som de inicialização"
+  '시동음 듣기': "Ouvir som de inicialização",
+  '분해능': "Resolução",
+  '자동 (창문에 맞추기)': "Automática (ajustar à janela)",
+  '기본': "Padrão"
 });

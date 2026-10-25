@@ -37,7 +37,7 @@
   const firstVisit = !OS.store.get('welcomed', false);
   const start = firstVisit
     ? welcome
-    : () => OS.launch('browser', { x: 0, y: 27, w: 945, h: 689 });
+    : () => OS.launch('browser', { x: 0, y: 27, w: OS.W - 19, h: OS.H - 43 });
   function powerButton() {
     const el = OS.h(`<div class="power off power-on"><button class="power-btn" title="켜기">⏻</button><div class="power-label">켜기</div></div>`);
     document.getElementById('overlay-layer').appendChild(el);

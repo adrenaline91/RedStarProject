@@ -330,6 +330,12 @@
 .sp-lname { font-size: 13px; white-space: nowrap; }
 .sp-lang { min-width: 0; }
 .sp-lnote { font-size: 10px; color: #888; margin-left: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sp-display { display: flex; gap: 20px; align-items: flex-start; }
+.sp-display > img { width: 96px; height: 96px; object-fit: contain; }
+.sp-display > div { flex: 1; }
+.sp-reslist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px 10px; max-height: 250px; overflow-y: auto; background: #fff; border: 1px solid #aaa; padding: 6px; }
+.sp-res { display: flex; align-items: center; gap: 6px; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+.sp-res.sel { background: #e4eefc; }
 .sp-extra { height: 24px; min-width: 200px; font-size: 13px; }
 .sp-progress { font-size: 12px; color: #555; }
 

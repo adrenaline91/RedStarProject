@@ -13,6 +13,7 @@
     { id: 'dock', name: '도크', icon: DOCKICON, group: '개인' },
     { id: 'language', name: '언어', icon: LANGICON, group: '개인' },
     { id: 'input', name: '입력방식', icon: OS.ICON_DOC, group: '개인' },
+    { id: 'display', name: '화면', icon: 'icons/display.png', group: '체계' },
     { id: 'datetime', name: '날자와 시간', icon: 'icons/date.png', group: '체계' },
     { id: 'sound', name: '소리', icon: SPEAKER, group: '체계' },
     { id: 'network', name: '망', icon: NETICON, group: '체계' },
@@ -141,6 +142,21 @@
         <div class="sp-row"><span class="sp-label">전환 건:</span> Shift + Space</div>
         <div class="sp-row"><span class="sp-label">시험:</span><input class="sp-text" placeholder="여기에 입력해보십시오"></div>`;
       el.querySelectorAll('input[name=ime]').forEach(r => r.onchange = () => OS.set('ime', r.value));
+    },
+    display(el) {
+      const cur = OS.settings.resolution;
+      const label = r => r.replace('x', ' × ');
+      el.innerHTML = `<div class="sp-display"><img src="icons/display.png">
+        <div><div class="sp-sub">분해능</div>
+        <div class="sp-reslist">
+          <label class="sp-res${cur === 'auto' ? ' sel' : ''}"><input type="radio" name="res" value="auto" ${cur === 'auto' ? 'checked' : ''}> <span>자동 (창문에 맞추기)</span></label>
+          ${OS.RESOLUTIONS.map(r => `<label class="sp-res${cur === r ? ' sel' : ''}"><input type="radio" name="res" value="${r}" ${cur === r ? 'checked' : ''}> <span data-notr>${label(r)}</span>${r === '964x732' ? ' <span class="sp-lnote">기본</span>' : ''}</label>`).join('')}
+        </div>
+        <div class="sp-row sp-note">${OS.W} × ${OS.H}</div></div></div>`;
+      el.querySelectorAll('input[name=res]').forEach(r => r.onchange = () => {
+        OS.set('resolution', r.value);
+        RENDER.display(el);
+      });
     },
     datetime(el) {
       const draw = () => {

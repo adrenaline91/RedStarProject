@@ -403,5 +403,8 @@ OS.i18n.add('en', {
   '페지를 열수 없습니다': "Cannot open this page",
   '시동음과 끝내기음 재생': "Play startup and log out sounds",
   '효과음 재생': "Play sound effects",
-  '시동음 듣기': "Play Startup Sound"
+  '시동음 듣기': "Play Startup Sound",
+  '분해능': "Resolution",
+  '자동 (창문에 맞추기)': "Automatic (fit to window)",
+  '기본': "Default"
 });

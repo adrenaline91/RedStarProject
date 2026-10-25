@@ -386,5 +386,8 @@ OS.i18n.add('fr', {
   '페지를 열수 없습니다': "Impossible d’ouvrir cette page",
   '시동음과 끝내기음 재생': "Jouer les sons de démarrage et de fin de session",
   '효과음 재생': "Jouer les effets sonores",
-  '시동음 듣기': "Écouter le son de démarrage"
+  '시동음 듣기': "Écouter le son de démarrage",
+  '분해능': "Résolution",
+  '자동 (창문에 맞추기)': "Automatique (ajuster à la fenêtre)",
+  '기본': "Par défaut"
 });
