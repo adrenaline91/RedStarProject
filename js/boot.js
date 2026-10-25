@@ -14,6 +14,7 @@
           <div class="dlg-msg">
             <p>This is just a cool fan project: a recreation of the Red Star OS 3.0 desktop in HTML, CSS and JavaScript, made by
               <a href="https://github.com/adrenaline91" target="_blank" rel="noopener noreferrer">github.com/adrenaline91</a>.</p>
+            <p><b>Work in progress:</b> not all the features of the real Red Star OS are here yet. I'm still working on it.</p>
             <p>It is a tech and curiosity project only. It has no political purpose and is not meant to offend, provoke or support any country, government or people.</p>
             <p class="welcome-small">Not affiliated with the Korea Computer Center or any official organization. Icons and wallpapers belong to their respective owners.</p>
           </div>

@@ -4,6 +4,8 @@ A recreation of the **Red Star OS 3.0** desktop (붉은별) in plain HTML, CSS a
 
 Made by [adrenaline91](https://github.com/adrenaline91).
 
+> **Work in progress:** not all the features of the real Red Star OS are here yet. I'm still working on it.
+
 > This is a tech and curiosity project only. It has no political purpose and is not meant to hurt, offend, provoke or support any country, government or people. It is not affiliated with the Korea Computer Center or any official organization.
 
 ## Features
