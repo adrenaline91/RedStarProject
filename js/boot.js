@@ -38,6 +38,28 @@
   const start = firstVisit
     ? welcome
     : () => OS.launch('browser', { x: 0, y: 27, w: 945, h: 689 });
+  function powerButton() {
+    const el = OS.h(`<div class="power off power-on"><button class="power-btn" title="켜기">⏻</button><div class="power-label">켜기</div></div>`);
+    document.getElementById('overlay-layer').appendChild(el);
+    const go = () => {
+      el.remove();
+      document.removeEventListener('keydown', key, true);
+      OS.sound.play('startup');
+      OS.boot(start, { silent: true });
+    };
+    const key = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } };
+    el.addEventListener('click', go);
+    document.addEventListener('keydown', key, true);
+    setTimeout(() => el.querySelector('.power-btn').focus(), 0);
+  }
+
   if (/[?&]nosplash\b/.test(location.search)) start();
-  else OS.boot(start);
+  else if (!OS.sound.enabled('startup')) OS.boot(start, { silent: true });
+  else {
+    let decided = false;
+    OS.sound.play('startup', {
+      onStart: () => { if (!decided) { decided = true; OS.boot(start, { silent: true }); } },
+      onBlocked: () => { if (!decided) { decided = true; powerButton(); } }
+    });
+  }
 })();

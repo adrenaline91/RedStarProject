@@ -16,15 +16,25 @@
   };
   const level = () => (OS.settings.muted ? 0 : OS.settings.volume / 100);
 
+  const enabled = name => {
+    const s = SOUNDS[name];
+    return !!s && level() > 0 && !!(s.system ? OS.settings.sysSounds : OS.settings.uiSounds);
+  };
+
   OS.sound = {
-    play(name) {
-      const s = SOUNDS[name], v = level();
-      if (!s || !v || !(s.system ? OS.settings.sysSounds : OS.settings.uiSounds)) return Promise.resolve();
+    enabled,
+    play(name, opts = {}) {
+      if (!enabled(name)) return Promise.resolve();
+      const s = SOUNDS[name];
       const a = new Audio(s.src);
-      a.volume = v;
+      a.volume = level();
       return a.play()
-        .then(() => new Promise(done => { a.onended = done; setTimeout(done, 6000); }))
+        .then(() => {
+          if (opts.onStart) opts.onStart();
+          return new Promise(done => { a.onended = done; setTimeout(done, 6000); });
+        })
         .catch(() => {
+          if (opts.onBlocked) return opts.onBlocked();
           if (!s.system) return;
           const t0 = Date.now();
           const retry = () => {

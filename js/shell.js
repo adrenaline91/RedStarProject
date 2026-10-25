@@ -501,10 +501,10 @@
   }));
 
   const overlay = document.getElementById('overlay-layer');
-  OS.boot = (cb) => {
+  OS.boot = (cb, opts = {}) => {
     const el = OS.h(`<div class="power boot"><img src="icons/redstar.png"><div class="boot-name">붉은별</div><div class="boot-bar"><i></i></div></div>`);
     overlay.appendChild(el);
-    OS.sound.play('startup');
+    if (!opts.silent) OS.sound.play('startup');
     let done = false;
     const finish = () => {
       if (done) return;
