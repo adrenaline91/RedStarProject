@@ -1,0 +1,14 @@
+{
+  "name": "redstar-os",
+  "version": "3.0.0",
+  "description": "Red Star OS 3.0 fan recreation - made by github.com/adrenaline91",
+  "author": "adrenaline91 (https://github.com/adrenaline91)",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "44.9.3"
+  }
+}
