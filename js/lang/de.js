@@ -395,7 +395,5 @@ OS.i18n.add('de', {
   '화면 전체': "Gesamter Bildschirm",
   '응용프로그람 창문': "Programmfenster",
   '콤퓨터 소리도 공유': "Auch den Computerton teilen",
-  '공유': "Teilen",
-  '새 탭에서 열거나 콤퓨터용 프로그람을 리용하십시오.': "Öffnen Sie sie in einem neuen Tab oder nutzen Sie die Desktop-App.",
-  '콤퓨터용 프로그람 내려받기': "Desktop-App herunterladen"
+  '공유': "Teilen"
 });

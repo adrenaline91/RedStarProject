@@ -412,7 +412,5 @@ OS.i18n.add('en', {
   '화면 전체': "Entire Screen",
   '응용프로그람 창문': "Application Window",
   '콤퓨터 소리도 공유': "Also share computer audio",
-  '공유': "Share",
-  '새 탭에서 열거나 콤퓨터용 프로그람을 리용하십시오.': "Open it in a new tab, or use the desktop app.",
-  '콤퓨터용 프로그람 내려받기': "Download the Desktop App"
+  '공유': "Share"
 });

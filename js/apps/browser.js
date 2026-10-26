@@ -18,10 +18,6 @@
   let visits = OS.store.get('history', []);
   const saveBookmarks = () => { OS.store.set('bookmarks', bookmarks); OS.emit('bookmarks'); };
 
-  const FRAME_BLOCKED = /(^|\.)(google\.[a-z.]+|youtube\.com|youtu\.be|discord\.com|discord\.gg|facebook\.com|instagram\.com|twitter\.com|x\.com|tiktok\.com|reddit\.com|twitch\.tv|netflix\.com|amazon\.[a-z.]+|github\.com|linkedin\.com|microsoft\.com|live\.com|outlook\.com|office\.com|apple\.com|spotify\.com|whatsapp\.com|telegram\.org|chatgpt\.com|openai\.com|roblox\.com|bing\.com|yahoo\.com|duckduckgo\.com|stackoverflow\.com|pinterest\.[a-z.]+|paypal\.com|ebay\.[a-z.]+|snapchat\.com|steampowered\.com|steamcommunity\.com|epicgames\.com|minecraft\.net|twitch\.com|soundcloud\.com|deezer\.com|tumblr\.com|vk\.com|baidu\.com|naver\.com|yandex\.[a-z.]+|cloudflare\.com)$/i;
-  const frameBlocked = url => { try { return FRAME_BLOCKED.test(new URL(url).hostname); } catch (e) { return false; } };
-  const APP_URL = 'https://github.com/adrenaline91/RedStarProject#run-it';
-
   function normalize(u) {
     u = (u || '').trim();
     if (!u) return '';
@@ -97,7 +93,6 @@
     <div class="br-content"></div>
     <div class="br-status">
       <span class="br-status-text">완료</span>
-      <button class="br-open-tab" title="새 탭에서 열기" style="display:none">새 탭에서 열기 ↗</button>
       <span class="sb-progress"><i></i></span>
     </div>
   </div>`;
@@ -169,9 +164,6 @@
         tab.fav = null;
         const w = ensureWeb(tab);
         w.src = url;
-      } else if (!ELECTRON && !internal && frameBlocked(url)) {
-        tab.mode = 'blocked';
-        showBlocked(tab, url);
       } else {
         tab.mode = 'frame';
         const f = tab.frame;
@@ -192,28 +184,6 @@
       const on = tab === ctx.active;
       tab.frame.classList.toggle('active', on && tab.mode === 'frame');
       if (tab.web) tab.web.classList.toggle('active', on && tab.mode === 'web');
-      if (tab.blocked) tab.blocked.classList.toggle('active', on && tab.mode === 'blocked');
-      if (on) q('.br-open-tab').style.display = !ELECTRON && /^https?:/.test(tab.url) ? '' : 'none';
-    }
-
-    function showBlocked(tab, url) {
-      if (!tab.blocked) {
-        tab.blocked = OS.h(`<div class="br-blocked"><img src="icons/browser.png">
-          <p class="br-blocked-host" data-notr></p>
-          <p>일부 웹싸이트는 다른 페지안에 표시되는것을 허용하지 않습니다.</p>
-          <p class="br-blocked-hint">새 탭에서 열거나 콤퓨터용 프로그람을 리용하십시오.</p>
-          <div><button class="btn default br-blocked-open">새 탭에서 열기</button><button class="btn br-blocked-app">콤퓨터용 프로그람 내려받기</button></div></div>`);
-        tab.blocked.querySelector('.br-blocked-open').onclick = () => window.open(tab.url, '_blank', 'noopener');
-        tab.blocked.querySelector('.br-blocked-app').onclick = () => window.open(APP_URL, '_blank', 'noopener');
-        content.appendChild(tab.blocked);
-      }
-      const host = new URL(url).hostname.replace(/^www\./, '');
-      tab.blocked.querySelector('.br-blocked-host').textContent = host;
-      tab.loading = false;
-      tab.pending = false;
-      tab.title = host;
-      setIcon(tab, FAVICON);
-      setLabel(tab, host);
     }
 
     function navigated(tab, url) {
@@ -322,7 +292,6 @@
       tab.el.remove();
       tab.frame.remove();
       if (tab.web) tab.web.remove();
-      if (tab.blocked) tab.blocked.remove();
       if (!ctx.tabs.length) return win.close();
       if (ctx.active === tab) select(ctx.tabs[Math.max(0, i - 1)]);
     }
@@ -369,7 +338,6 @@
       saveBookmarks();
     };
 
-    q('.br-open-tab').onclick = () => { if (ctx.active && ctx.active.url) window.open(ctx.active.url, '_blank', 'noopener'); };
     q('.b-back').onclick = ctx.back;
     q('.b-fwd').onclick = ctx.forward;
     q('.b-reload').onclick = ctx.reload;

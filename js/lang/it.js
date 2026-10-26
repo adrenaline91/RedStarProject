@@ -395,7 +395,5 @@ OS.i18n.add('it', {
   '화면 전체': "Schermo intero",
   '응용프로그람 창문': "Finestra dell’applicazione",
   '콤퓨터 소리도 공유': "Condividi anche l’audio del computer",
-  '공유': "Condividi",
-  '새 탭에서 열거나 콤퓨터용 프로그람을 리용하십시오.': "Aprilo in una nuova scheda o usa l’app desktop.",
-  '콤퓨터용 프로그람 내려받기': "Scarica l’app desktop"
+  '공유': "Condividi"
 });
