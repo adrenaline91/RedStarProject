@@ -396,10 +396,6 @@ OS.i18n.add('fr', {
   '응용프로그람 창문': "Fenêtre d’application",
   '콤퓨터 소리도 공유': "Partager aussi le son de l’ordinateur",
   '공유': "Partager",
-  '다시 시도': "Réessayer",
-  '구름열람기 사용시간이 끝났습니다.': "La session du navigateur cloud est terminée.",
-  '지금 사용자가 너무 많습니다. 잠시후 다시 시도하십시오.': "Trop de monde l’utilise en ce moment. Réessayez dans un instant.",
-  '구름열람기에 련결할수 없습니다.': "Impossible de se connecter au navigateur cloud.",
   '새 탭에서 열거나 콤퓨터용 프로그람을 리용하십시오.': "Ouvrez-le dans un nouvel onglet ou utilisez l’application de bureau.",
   '콤퓨터용 프로그람 내려받기': "Télécharger l’application de bureau"
 });

@@ -15,10 +15,25 @@ Made by [adrenaline91](https://github.com/adrenaline91).
 - **Boot, sleep, restart, shut down and log out** screens.
 - **Sounds**: the original Red Star OS startup and log out sounds, and the standard KDE 4 "Oxygen" sounds that Red Star OS 3.0 uses for everything else (warnings, questions, errors, information, empty trash, minimize, maximize, close). They follow the volume and mute settings and can be turned off in System Preferences > Sound.
 - **Korean 2-set input method** (Shift+Space or the A/가 button) that composes Hangul syllables in any text field.
-- **Virtual file system** saved in the browser (localStorage), with Trash, drag & drop and file import from your computer.
+- **Virtual file system** saved on your computer, with Trash, drag & drop and file import.
 - **Apps**: 내나라열람기 (Naenara browser, with tabs, history and bookmarks), File Manager, Text Editor, Image Viewer, Calendar, Address Book, Calculator, Video Player, File Search, System Preferences and Terminal.
-- **12 languages built in** (original North Korean, South Korean, English, French, Spanish, German, Italian, Portuguese, Russian, Chinese, Japanese, Arabic). About 75 more can be translated on your computer by the browser's built-in translator (Chrome 138+).
+- **12 languages built in** (original North Korean, South Korean, English, French, Spanish, German, Italian, Portuguese, Russian, Chinese, Japanese, Arabic).
 
+## Run it
+
+Red Star OS runs as a desktop app. It requires [Node.js](https://nodejs.org).
+
+- **Windows**: download this repository, then double-click `Red Star OS.bat`. The first launch installs Electron (about 100 MB), the next ones start right away.
+- **Any system**:
+
+  ```bash
+  npm install
+  npm start
+  ```
+
+  If `npm install` does not download the Electron binary, run `node node_modules/electron/install.js` once.
+
+The Naenara browser can open any website. Press **F11** to toggle full screen.
 
 ## Project structure
 

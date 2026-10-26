@@ -396,10 +396,6 @@ OS.i18n.add('it', {
   '응용프로그람 창문': "Finestra dell’applicazione",
   '콤퓨터 소리도 공유': "Condividi anche l’audio del computer",
   '공유': "Condividi",
-  '다시 시도': "Riprova",
-  '구름열람기 사용시간이 끝났습니다.': "La sessione del browser cloud è terminata.",
-  '지금 사용자가 너무 많습니다. 잠시후 다시 시도하십시오.': "Troppe persone lo stanno usando ora. Riprova tra poco.",
-  '구름열람기에 련결할수 없습니다.': "Impossibile connettersi al browser cloud.",
   '새 탭에서 열거나 콤퓨터용 프로그람을 리용하십시오.': "Aprilo in una nuova scheda o usa l’app desktop.",
   '콤퓨터용 프로그람 내려받기': "Scarica l’app desktop"
 });
