@@ -389,5 +389,15 @@ OS.i18n.add('fr', {
   '시동음 듣기': "Écouter le son de démarrage",
   '분해능': "Résolution",
   '자동 (창문에 맞추기)': "Automatique (ajuster à la fenêtre)",
-  '기본': "Par défaut"
+  '기본': "Par défaut",
+  '화면 공유': "Partager l’écran",
+  '공유할 화면이나 창문을 선택하십시오.': "Choisissez un écran ou une fenêtre à partager.",
+  '화면 전체': "Écran entier",
+  '응용프로그람 창문': "Fenêtre d’application",
+  '콤퓨터 소리도 공유': "Partager aussi le son de l’ordinateur",
+  '공유': "Partager",
+  '다시 시도': "Réessayer",
+  '구름열람기 사용시간이 끝났습니다.': "La session du navigateur cloud est terminée.",
+  '지금 사용자가 너무 많습니다. 잠시후 다시 시도하십시오.': "Trop de monde l’utilise en ce moment. Réessayez dans un instant.",
+  '구름열람기에 련결할수 없습니다.': "Impossible de se connecter au navigateur cloud."
 });

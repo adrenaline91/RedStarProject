@@ -24,7 +24,7 @@ Made by [adrenaline91](https://github.com/adrenaline91).
 ### In a web browser
 
 Open `index.html`, or serve the folder with any static web server (GitHub Pages works too).
-In this mode, many websites (Google, YouTube…) refuse to be displayed inside the Naenara browser: this is a security rule of the websites themselves.
+In this mode, many websites (Google, YouTube…) refuse to be displayed inside the Naenara browser: this is a security rule of the websites themselves. To make every website work in the web version too, set up the optional cloud browser: see [`cloud/README.md`](cloud/README.md).
 
 ### As a desktop app (every website works)
 

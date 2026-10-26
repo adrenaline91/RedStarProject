@@ -2,6 +2,8 @@
   'use strict';
   const HOME = 'about:home', INFO = 'about:info';
   const ELECTRON = !!window.rsElectron;
+  const CLOUD = !ELECTRON && window.RS_CLOUD && window.RS_CLOUD.endpoint ? window.RS_CLOUD.endpoint.replace(/\/+$/, '') : '';
+  const cloudIds = new Set();
   const SEARCH = q => ELECTRON
     ? 'https://www.google.com/search?q=' + encodeURIComponent(q)
     : 'https://ko.wikipedia.org/w/index.php?search=' + encodeURIComponent(q);
@@ -164,7 +166,12 @@
         tab.fav = null;
         const w = ensureWeb(tab);
         w.src = url;
+      } else if (CLOUD && !internal && url !== 'about:blank') {
+        tab.mode = 'cloud';
+        tab.pending = true;
+        openCloud(tab, url);
       } else {
+        endCloud(tab);
         tab.mode = 'frame';
         const f = tab.frame;
         if (internal) {
@@ -184,6 +191,92 @@
       const on = tab === ctx.active;
       tab.frame.classList.toggle('active', on && tab.mode === 'frame');
       if (tab.web) tab.web.classList.toggle('active', on && tab.mode === 'web');
+      if (tab.cloud) tab.cloud.box.classList.toggle('active', on && tab.mode === 'cloud');
+    }
+
+    function navigated(tab, url) {
+      if (tab.pending) { tab.history[tab.hi] = url; tab.pending = false; }
+      else if (url !== tab.history[tab.hi]) {
+        tab.history = tab.history.slice(0, tab.hi + 1);
+        tab.history.push(url);
+        tab.hi = tab.history.length - 1;
+      }
+      tab.url = tab.typed = url;
+      addVisit(url);
+      if (tab === ctx.active) sync();
+    }
+
+    function cloudMessage(tab, text, retry) {
+      const c = tab.cloud;
+      c.box.querySelectorAll('.br-cloud-msg').forEach(m => m.remove());
+      if (!text) return;
+      const m = OS.h(`<div class="br-cloud-msg"><img src="icons/browser.png"><p>${OS.esc(text)}</p>
+        <div><button class="btn br-cloud-tab">새 탭에서 열기</button>${retry ? '<button class="btn default br-cloud-retry">다시 시도</button>' : ''}</div></div>`);
+      m.querySelector('.br-cloud-tab').onclick = () => window.open(tab.url, '_blank', 'noopener');
+      if (retry) m.querySelector('.br-cloud-retry').onclick = () => { endCloud(tab); load(tab, tab.url); };
+      c.box.appendChild(m);
+    }
+    function endCloud(tab) {
+      const c = tab.cloud;
+      if (!c) return;
+      try { if (c.hb) c.hb.destroy(); } catch (e) {}
+      if (c.id) { cloudIds.delete(c.id); fetch(CLOUD + '/session/' + c.id, { method: 'DELETE' }).catch(() => {}); }
+      c.box.remove();
+      tab.cloud = null;
+    }
+    function openCloud(tab, url) {
+      if (tab.cloud && tab.cloud.hb) { tab.cloud.hb.tabs.update({ url }).catch(() => {}); return; }
+      if (tab.cloud) { tab.cloud.pendingUrl = url; return; }
+      const box = OS.h('<div class="br-cloud"><div class="br-cloud-view"></div></div>');
+      content.appendChild(box);
+      const c = tab.cloud = { box, hb: null, id: null, pendingUrl: null };
+      showMode(tab);
+      fetch(CLOUD + '/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url }) })
+        .then(r => r.json().catch(() => ({})).then(d => {
+          if (!r.ok) throw new Error(d.error === 'busy' ? 'busy' : 'error');
+          return d;
+        }))
+        .then(async d => {
+          if (tab.cloud !== c) return fetch(CLOUD + '/session/' + d.id, { method: 'DELETE' });
+          c.id = d.id;
+          cloudIds.add(d.id);
+          const { default: Hyperbeam } = await import('https://unpkg.com/@hyperbeam/web@0.0.38/dist/index.js');
+          const hb = await Hyperbeam(box.querySelector('.br-cloud-view'), d.embed_url, {
+            adminToken: d.admin_token,
+            timeout: 20000,
+            delegateKeyboard: false,
+            volume: OS.settings.muted ? 0 : OS.settings.volume / 100,
+            onDisconnect: () => {
+              if (tab.cloud !== c) return;
+              tab.loading = false;
+              cloudMessage(tab, '구름열람기 사용시간이 끝났습니다.', true);
+              if (tab === ctx.active) sync();
+            }
+          });
+          if (tab.cloud !== c) { hb.destroy(); return; }
+          c.hb = hb;
+          hb.tabs.onUpdated.addListener((id, info) => {
+            if (tab.cloud !== c || tab.mode !== 'cloud') return;
+            if (info.url) navigated(tab, info.url);
+            if (info.title) { tab.title = info.title; setLabel(tab, info.title); }
+            if (info.status === 'loading') { tab.loading = true; setIcon(tab, SPINNER); }
+            if (info.status === 'complete') { tab.loading = false; setIcon(tab, FAVICON); setLabel(tab, tab.title || tab.url); }
+            if (tab === ctx.active) sync();
+          });
+          tab.loading = false;
+          setIcon(tab, FAVICON);
+          setLabel(tab, tab.url.replace(/^https?:\/\/(www\.)?/, ''));
+          if (c.pendingUrl) hb.tabs.update({ url: c.pendingUrl }).catch(() => {});
+          if (tab === ctx.active) sync();
+        })
+        .catch(e => {
+          if (tab.cloud !== c) return;
+          tab.loading = false;
+          tab.error = true;
+          setIcon(tab, FAVICON);
+          cloudMessage(tab, e.message === 'busy' ? '지금 사용자가 너무 많습니다. 잠시후 다시 시도하십시오.' : '구름열람기에 련결할수 없습니다.', true);
+          if (tab === ctx.active) sync();
+        });
     }
 
     function ensureWeb(tab) {
@@ -197,16 +290,7 @@
       const refresh = () => { if (tab === ctx.active) sync(); };
       const favHtml = () => tab.fav ? `<img class="fav" src="${OS.esc(tab.fav)}">` : FAVICON;
       function nav(url) {
-        if (!mine()) return;
-        if (tab.pending) { tab.history[tab.hi] = url; tab.pending = false; }
-        else if (url !== tab.history[tab.hi]) {
-          tab.history = tab.history.slice(0, tab.hi + 1);
-          tab.history.push(url);
-          tab.hi = tab.history.length - 1;
-        }
-        tab.url = tab.typed = url;
-        addVisit(url);
-        refresh();
+        if (mine()) navigated(tab, url);
       }
       w.addEventListener('did-start-loading', () => {
         if (!mine()) return;
@@ -289,6 +373,7 @@
       tab.el.remove();
       tab.frame.remove();
       if (tab.web) tab.web.remove();
+      endCloud(tab);
       if (!ctx.tabs.length) return win.close();
       if (ctx.active === tab) select(ctx.tabs[Math.max(0, i - 1)]);
     }
@@ -311,6 +396,7 @@
       const t = ctx.active;
       if (!t || !t.url) return;
       if (t.mode === 'web' && t.web) { try { t.web.reload(); return; } catch (e) {} }
+      if (t.mode === 'cloud' && t.cloud && t.cloud.hb) { t.cloud.hb.tabs.reload().catch(() => {}); return; }
       load(t, t.url);
     };
     ctx.stop = () => {
@@ -461,6 +547,12 @@
         { label: '내나라열람기에 대하여', action: () => OS.appAbout(OS.apps.browser) }
       ] }
     ];
+  }
+
+  if (CLOUD) {
+    addEventListener('pagehide', () => {
+      cloudIds.forEach(id => { try { navigator.sendBeacon(CLOUD + '/session/' + id + '/end'); } catch (e) {} });
+    });
   }
 
   if (ELECTRON) {

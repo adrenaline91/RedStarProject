@@ -389,5 +389,15 @@ OS.i18n.add('it', {
   '시동음 듣기': "Ascolta il suono di avvio",
   '분해능': "Risoluzione",
   '자동 (창문에 맞추기)': "Automatica (adatta alla finestra)",
-  '기본': "Predefinita"
+  '기본': "Predefinita",
+  '화면 공유': "Condividi schermo",
+  '공유할 화면이나 창문을 선택하십시오.': "Scegli uno schermo o una finestra da condividere.",
+  '화면 전체': "Schermo intero",
+  '응용프로그람 창문': "Finestra dell’applicazione",
+  '콤퓨터 소리도 공유': "Condividi anche l’audio del computer",
+  '공유': "Condividi",
+  '다시 시도': "Riprova",
+  '구름열람기 사용시간이 끝났습니다.': "La sessione del browser cloud è terminata.",
+  '지금 사용자가 너무 많습니다. 잠시후 다시 시도하십시오.': "Troppe persone lo stanno usando ora. Riprova tra poco.",
+  '구름열람기에 련결할수 없습니다.': "Impossibile connettersi al browser cloud."
 });

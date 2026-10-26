@@ -406,5 +406,15 @@ OS.i18n.add('en', {
   '시동음 듣기': "Play Startup Sound",
   '분해능': "Resolution",
   '자동 (창문에 맞추기)': "Automatic (fit to window)",
-  '기본': "Default"
+  '기본': "Default",
+  '화면 공유': "Share Screen",
+  '공유할 화면이나 창문을 선택하십시오.': "Choose a screen or window to share.",
+  '화면 전체': "Entire Screen",
+  '응용프로그람 창문': "Application Window",
+  '콤퓨터 소리도 공유': "Also share computer audio",
+  '공유': "Share",
+  '다시 시도': "Try Again",
+  '구름열람기 사용시간이 끝났습니다.': "The cloud browser session has ended.",
+  '지금 사용자가 너무 많습니다. 잠시후 다시 시도하십시오.': "Too many people are using it right now. Please try again in a moment.",
+  '구름열람기에 련결할수 없습니다.': "Cannot connect to the cloud browser."
 });

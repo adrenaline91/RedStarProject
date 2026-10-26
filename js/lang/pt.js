@@ -389,5 +389,15 @@ OS.i18n.add('pt', {
   '시동음 듣기': "Ouvir som de inicialização",
   '분해능': "Resolução",
   '자동 (창문에 맞추기)': "Automática (ajustar à janela)",
-  '기본': "Padrão"
+  '기본': "Padrão",
+  '화면 공유': "Compartilhar tela",
+  '공유할 화면이나 창문을 선택하십시오.': "Escolha uma tela ou janela para compartilhar.",
+  '화면 전체': "Tela inteira",
+  '응용프로그람 창문': "Janela do aplicativo",
+  '콤퓨터 소리도 공유': "Compartilhar também o áudio do computador",
+  '공유': "Compartilhar",
+  '다시 시도': "Tentar novamente",
+  '구름열람기 사용시간이 끝났습니다.': "A sessão do navegador na nuvem terminou.",
+  '지금 사용자가 너무 많습니다. 잠시후 다시 시도하십시오.': "Muitas pessoas estão usando agora. Tente novamente em instantes.",
+  '구름열람기에 련결할수 없습니다.': "Não é possível conectar ao navegador na nuvem."
 });

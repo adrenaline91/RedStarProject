@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https: http:; media-src 'self' blob: data:; frame-src * about: data: blob:; connect-src 'self'; font-src 'self' data:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https: http:; media-src 'self' blob: data: mediastream: https:; worker-src 'self' blob: https://unpkg.com; frame-src * about: data: blob:; connect-src 'self' https: wss:; font-src 'self' data:">
 <title>붉은별 3.0</title>
 <link rel="stylesheet" href="css/os.css">
 <link rel="stylesheet" href="css/apps.css">
@@ -54,6 +54,7 @@
 <script src="js/lang/ko.js"></script>
 <script src="js/shell.js"></script>
 <script src="js/ime.js"></script>
+<script src="js/cloud-config.js"></script>
 <script src="js/apps/browser.js"></script>
 <script src="js/apps/files.js"></script>
 <script src="js/apps/editor.js"></script>
