@@ -126,6 +126,15 @@
 .br-content iframe.active { display: block; }
 .br-content .br-web { position: absolute; inset: 0; width: 100%; height: 100%; visibility: hidden; z-index: 0; background: #fff; }
 .br-content .br-web.active { visibility: visible; z-index: 1; }
+.br-content .br-blocked { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(#fff, #eef3f8); font-size: 13px; color: #333; text-align: center; padding: 20px; }
+.br-content .br-blocked.active { display: flex; }
+.br-blocked img { width: 80px; height: 80px; object-fit: contain; margin-bottom: 6px; }
+.br-blocked-host { font-size: 20px; color: #1a3f8a; }
+.br-blocked-hint { color: #777; font-size: 12px; }
+.br-blocked div { display: flex; gap: 10px; margin-top: 10px; }
+.br-open-tab { font-size: 11px; color: #1d5fc4; padding: 0 8px; margin-right: 8px; height: 16px; border-radius: 8px; white-space: nowrap; }
+.br-open-tab:hover { background: rgba(0,0,0,.08); }
+
 .br-content .br-cloud { position: absolute; inset: 0; display: none; background: #fff; }
 .br-content .br-cloud.active { display: block; }
 .br-cloud-view { position: absolute; inset: 0; }

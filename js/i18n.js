@@ -95,7 +95,7 @@
     return null;
   }
 
-  const SUFFIX = /(\s*(?:\.\.\.|…|:|：|➜))$/;
+  const SUFFIX = /(\s*(?:\.\.\.|…|:|：|➜|↗))$/;
   function line(s, id) {
     if (!HANGUL.test(s)) return s;
     const [, pre, core, post] = s.match(/^(\s*(?:[·•\-–]\s+)?)([\s\S]*?)(\s*)$/);

@@ -399,5 +399,7 @@ OS.i18n.add('pt', {
   '다시 시도': "Tentar novamente",
   '구름열람기 사용시간이 끝났습니다.': "A sessão do navegador na nuvem terminou.",
   '지금 사용자가 너무 많습니다. 잠시후 다시 시도하십시오.': "Muitas pessoas estão usando agora. Tente novamente em instantes.",
-  '구름열람기에 련결할수 없습니다.': "Não é possível conectar ao navegador na nuvem."
+  '구름열람기에 련결할수 없습니다.': "Não é possível conectar ao navegador na nuvem.",
+  '새 탭에서 열거나 콤퓨터용 프로그람을 리용하십시오.': "Abra em uma nova aba ou use o aplicativo de desktop.",
+  '콤퓨터용 프로그람 내려받기': "Baixar o aplicativo de desktop"
 });
