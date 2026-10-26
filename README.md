@@ -19,28 +19,6 @@ Made by [adrenaline91](https://github.com/adrenaline91).
 - **Apps**: 내나라열람기 (Naenara browser, with tabs, history and bookmarks), File Manager, Text Editor, Image Viewer, Calendar, Address Book, Calculator, Video Player, File Search, System Preferences and Terminal.
 - **12 languages built in** (original North Korean, South Korean, English, French, Spanish, German, Italian, Portuguese, Russian, Chinese, Japanese, Arabic). About 75 more can be translated on your computer by the browser's built-in translator (Chrome 138+).
 
-## Run it
-
-### In a web browser
-
-Open `index.html`, or serve the folder with any static web server (GitHub Pages works too).
-In this mode, many websites (Google, YouTube…) refuse to be displayed inside the Naenara browser: this is a security rule of the websites themselves. To make every website work in the web version too, set up the optional cloud browser: see [`cloud/README.md`](cloud/README.md).
-
-### As a desktop app (every website works)
-
-Requires [Node.js](https://nodejs.org).
-
-- **Windows**: double-click `Red Star OS.bat` (the first launch installs Electron, about 100 MB).
-- **Any system**:
-
-  ```bash
-  npm install
-  npm start
-  ```
-
-  If `npm install` does not download the Electron binary, run `node node_modules/electron/install.js` once.
-
-The desktop app uses Electron `<webview>` tags, so the Naenara browser can open any website. Press **F11** to toggle full screen.
 
 ## Project structure
 
